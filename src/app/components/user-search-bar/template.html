@@ -1,0 +1,29 @@
+
+<ion-searchbar placeholder="Search..." [(ngModel)]="text" debounce="350" (ionChange)="onChange()"></ion-searchbar>
+
+<ion-list *ngIf="text" class="ion-margin-horizontal">
+    <ion-item *ngIf="error">
+        <ion-label>An error occurred. Try again later</ion-label>
+    </ion-item>
+    <ion-item *ngIf="!result && !error">
+        <ion-spinner style="margin: auto"></ion-spinner>
+    </ion-item>
+    <div *ngIf="result">
+        <ion-item *ngIf="result.length == 0">
+            <ion-label>No results.</ion-label>
+        </ion-item>
+        <ion-item *ngFor="let user of result" (click)="didClickMsg(user)">
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label>{{user.name}}</ion-label>
+            <ion-buttons slot="end">
+                <ion-button (click)="didClickMsg(user)">
+                    <ion-icon slot="icon-only" name="person-add"></ion-icon>
+                </ion-button>
+                <ion-button (click)="didClickMsg(user)">
+                    <ion-icon slot="icon-only" name="chatbubble"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-item>
+        <ion-item-divider>{{result.length}} users</ion-item-divider>
+    </div>
+</ion-list>

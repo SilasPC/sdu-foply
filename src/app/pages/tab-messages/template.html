@@ -1,0 +1,50 @@
+
+<app-header-toolbar title="Messages"></app-header-toolbar>
+
+<ion-content [fullscreen]="true">
+
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+
+	<user-search-bar (onClick)="newThread($event)"></user-search-bar>
+
+	<ion-list>
+
+		<ion-item *ngIf="!chatManager">No messages. Start a conversation!</ion-item>
+
+		<ion-item-sliding *ngFor="let chat of (chatManager?.data$ | async)" #slidingItem>
+
+			<ion-item-options>
+				<ion-item-option color="danger" (click)="deleteThread(chat, slidingItem)">
+					<ion-icon slot="icon-only" name="trash"></ion-icon>
+				</ion-item-option>
+				<ion-item-option (click)="toggleUnread(chat, slidingItem)">
+					<ion-icon slot="icon-only" name="checkmark"></ion-icon>
+				</ion-item-option>
+			</ion-item-options>
+
+			<ion-item button (click)="openThread(chat, slidingItem)">
+				<ion-icon name="person" slot="start"></ion-icon>
+				<ion-label>
+					<h2>{{chat.user.name}} <b *ngIf="chat.data.unread">(unread)</b></h2>
+					<p>
+						<b>{{chat.data.lastMessage.outgoing ? 'You: ' : ''}}</b>
+						{{truncate(chat.data.lastMessage.body)}}
+					</p>
+				</ion-label>
+				<ion-note>{{ prettyStamp(chat.data.lastMessage.stamp.unix) }}</ion-note>
+			</ion-item>
+
+		</ion-item-sliding>
+
+	</ion-list>
+
+
+	<!--ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button (click)="newThread()">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab-->
+
+</ion-content>

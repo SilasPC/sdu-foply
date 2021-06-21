@@ -1,0 +1,27 @@
+<ion-list>
+
+  <ion-item button (click)="signOut()">
+    <ion-icon slot="start" name="log-out"></ion-icon>
+    <ion-label>Sign out</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-icon slot="start" [name]="darkMode?'sunny':'moon'"></ion-icon>
+    <ion-label>Dark mode</ion-label>
+    <ion-toggle [checked]="darkMode" (ionChange)="darkModeChanged($event.detail.checked)"></ion-toggle>
+  </ion-item>
+
+  <div>
+
+    <ion-item-divider>Debug options</ion-item-divider>
+    <ion-item button (click)="resetStorage()">
+      <ion-icon slot="start" name="refresh"></ion-icon>
+      <ion-label>Reset storage</ion-label>
+    </ion-item>
+    <ion-item button (click)="resetState()">
+      <ion-icon slot="start" name="refresh"></ion-icon>
+      <ion-label>Reset state</ion-label>
+    </ion-item>
+
+  </div>
+
+</ion-list>

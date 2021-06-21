@@ -1,0 +1,63 @@
+
+<app-header-toolbar title="Profile"></app-header-toolbar>
+
+<ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- User icon and bio -->
+  <ion-avatar style="margin: 1em auto 0; width: 50%; height: auto;">
+    <img src="https://cdn2.mhpbooks.com/2019/11/512px-White_domesticated_duck_stretching-320x320.jpg">
+  </ion-avatar>
+  <h2 style="text-align: center; margin-top: 0.2em; margin-bottom: 1em;">{{userName$ | async}}</h2>
+  <ion-label style="margin: 0 1em 0;">Here goes a bio</ion-label>
+
+  <!--app-edit-field value="My user name" [updater]="editUserName.bind(this)"></app-edit-field-->
+
+  <!-- Segment selector -->
+  <ion-segment
+    value="followers"
+    (ionChange)="segmentChoice=$event.detail.value"
+  >
+    <ion-segment-button value="followers">
+      <ion-label>Followers ({{followers.length}})</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="followees">
+      <ion-label>Followees ({{followees.length}})</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Segment view 'followers' -->
+  <ion-list *ngIf="segmentChoice=='followers'">
+    <ion-item-divider>
+      <ion-label>
+        People who follow you
+      </ion-label>
+    </ion-item-divider>
+    <ion-item
+      *ngFor="let follower of followers"
+    >
+      <ion-label>{{follower.name}}</ion-label>
+      <ion-button slot="end" (click)="doFollow(follower)">
+        <ion-icon slot="icon-only" name="person-add"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Segment view 'followees' -->
+  <ion-list *ngIf="segmentChoice=='followees'">
+    <ion-item-divider>
+      <ion-label>
+        People you follow
+      </ion-label>
+    </ion-item-divider>
+    <ion-item
+      *ngFor="let followee of followees"
+    >
+      <ion-label>{{followee.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-content>
+  <ion-card class="login-card">
+    <ion-card-header>
+      <ion-card-title>Hoply</ion-card-title>
+      <ion-card-subtitle>The bestest social media!</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input
+        placeholder="Enter username"
+        [(ngModel)]="username"
+        (keyup.enter)="signIn()"
+      >
+      </ion-input>
+      <ion-button
+        block
+        class="center"
+        (click)="signIn()"
+      >
+        Sign in
+      </ion-button>
+      <ion-button
+        block
+        fill="outline"
+        class="center"
+        (click)="signUp()"
+      >
+        New to Hoply?
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

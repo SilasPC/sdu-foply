@@ -1,0 +1,19 @@
+
+<ion-item>
+    <ion-input
+        [(ngModel)]="value"
+        (ionBlur)="didBlur()"
+        (ionFocus)="didFocus()"
+        (ionChange)="didChange()"
+    ></ion-input>
+    <ion-icon
+        name="create-outline"
+        slot="end"
+        (click)="didClickIcon()"
+        [hidden]="loading"
+    ></ion-icon>
+    <ion-spinner
+        name="crescent"
+        [hidden]="!loading"
+    ></ion-spinner>
+</ion-item>

@@ -1,0 +1,7 @@
+{
+  "name": "Hoply",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
